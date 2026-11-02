@@ -1,0 +1,49 @@
+{
+  "name": "little-coding-agent",
+  "version": "0.5.0",
+  "private": true,
+  "description": "A local, reviewable coding agent with a Responses API tool loop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brcors/little-coding-agent.git"
+  },
+  "homepage": "https://github.com/Brcors/little-coding-agent#readme",
+  "bugs": {
+    "url": "https://github.com/Brcors/little-coding-agent/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "bin": {
+    "little-agent": "dist/cli.js"
+  },
+  "scripts": {
+    "agent": "tsx src/cli.ts",
+    "demo": "tsx src/cli.ts demo",
+    "doctor": "tsx src/cli.ts doctor",
+    "ui": "npm run build:web && tsx src/server.ts",
+    "build:web": "vite build",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.web.json",
+    "build": "tsc && vite build",
+    "test": "tsx --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "diff": "^9.0.0",
+    "lucide-react": "^1.66.0",
+    "openai": "^7.47.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}

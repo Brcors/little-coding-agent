@@ -1,0 +1,6 @@
+{
+  "checks": {
+    "test": { "command": "node", "args": ["--test", "cart.test.mjs"], "timeout_ms": 10000 }
+  },
+  "docker_image": "node:24-alpine"
+}

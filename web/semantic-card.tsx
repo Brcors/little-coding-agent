@@ -1,0 +1,8 @@
+import { CheckCircle2, Circle, Loader2, ShieldCheck, Workflow } from 'lucide-react';
+import type { SemanticExecution } from '../src/semantic';
+import './semantic.css';
+
+const intentLabels: Record<string, string> = { bug_fix: '修复问题', feature: '实现功能', tests: '补充测试', refactor: '重构', explain: '解释代码', review: '审查代码', other: '其他任务' };
+export function SemanticCard({ context, model, demo, active, finished }: { context: SemanticExecution; model: string; demo: boolean; active: boolean; finished: boolean }) {
+  return <section className="semantic-card" aria-label="语义到工具调用"><div className="semantic-card-heading"><span><Workflow size={15} />理解语义后的执行</span><span>{intentLabels[context.intent] || context.intent}</span></div><div className="semantic-stages"><span><CheckCircle2 size={13} />{context.source === 'llm' ? 'LLM 语义理解' : '规则整理'}</span><i>→</i><span>{active ? <Loader2 size={13} className="spin" /> : context.grounded ? <CheckCircle2 size={13} /> : <Circle size={13} />}{demo ? '固定演示调用' : '模型选择工具'}</span><i>→</i><span>{finished ? <CheckCircle2 size={13} /> : <Circle size={13} />}结果审阅</span></div><p>{context.understood_goal}</p><div className="semantic-permission"><span><ShieldCheck size={13} />{context.policy === 'read_only' ? '只读分析，不修改或执行项目代码' : '修改任务副本，接受后才写回原项目'}</span><span>{context.grounded ? '已读取项目证据' : '等待项目内容'}</span></div><details><summary>{demo ? '演示驱动' : `工具决策模型：${model}`} · {context.available_tools.length} 个允许工具</summary><div className="semantic-tools">{context.available_tools.map(name => <code key={name}>{name}</code>)}</div><small>权限受项目配置限制；模型可选择的工具不等于已经执行的动作。</small></details></section>;
+}
